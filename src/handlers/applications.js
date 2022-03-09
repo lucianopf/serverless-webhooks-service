@@ -1,6 +1,11 @@
 const applicationService = require('../services/applications')
 
-async function create (event) {}
+async function create (event) {
+  const { body: rawBody } = event
+  const body = JSON.parse(rawBody)
+
+  return applicationService.create(body)
+}
 
 async function list (event) {
   return applicationService.list()

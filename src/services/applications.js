@@ -1,8 +1,10 @@
-async function create (requester, payload) {
-  return 'created'
+const { Applications } = require('../database')
+
+async function create (payload) {
+  return await Applications.create(payload)
 }
 
-async function list (requester) {
+async function list () {
   return [{ foo: 'ao', bar: true }]
 }
 

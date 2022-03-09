@@ -24,5 +24,9 @@
   "devDependencies": {
     "serverless": "^3.7.2",
     "serverless-offline": "^8.5.0"
+  },
+  "dependencies": {
+    "cuid": "^2.1.8",
+    "dynamoose": "^2.8.5"
   }
 }
