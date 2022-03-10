@@ -23,12 +23,13 @@ TODO
 ## changelog
 
 - initial commit with design diagram 🎉
+- adding basic project structure
 
 ## roadmap
 
 - [x] create project design
-- [ ] create project structure
-- [ ] create project infrastructure
+- [x] create project structure
+- [x] create basic project infrastructure
 - [ ] create setup config
 - [ ] create new webhook
 - [ ] create webhook sender
