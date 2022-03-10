@@ -1,0 +1,34 @@
+{
+  "name": "serverless-webhooks-service",
+  "version": "1.0.0",
+  "description": "serverless-webhooks-service",
+  "main": "serverless.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "dev": "NODE_ENV=development sls offline"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucianopf/serverless-webhooks-service.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucianopf/serverless-webhooks-service/issues"
+  },
+  "homepage": "https://github.com/lucianopf/serverless-webhooks-service#readme",
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "serverless": "^3.7.2",
+    "serverless-offline": "^8.5.0"
+  },
+  "dependencies": {
+    "cuid": "^2.1.8",
+    "dynamoose": "^2.8.5"
+  }
+}
