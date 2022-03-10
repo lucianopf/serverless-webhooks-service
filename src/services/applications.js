@@ -1,7 +1,7 @@
 const { Applications } = require('../database')
 
 async function create (payload) {
-  return await Applications.create(payload)
+  return Applications.create(payload)
 }
 
 async function list () {

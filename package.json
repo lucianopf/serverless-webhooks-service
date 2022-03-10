@@ -9,7 +9,7 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
-    "dev": "sls offline"
+    "dev": "NODE_ENV=development sls offline"
   },
   "repository": {
     "type": "git",
