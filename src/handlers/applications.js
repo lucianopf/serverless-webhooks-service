@@ -7,20 +7,11 @@ async function create (event) {
   return applicationService.create(body)
 }
 
-async function list (event) {
-  return applicationService.list()
-}
-
 async function show (event) {
   return 'showing application'
 }
 
-async function update (event) {}
-
-
 module.exports = {
   create,
-  list,
   show,
-  update,
 }
