@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "lib": ["esnext"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": ".build",
+    "sourceMap": true,
+    "target": "esnext",
+    "skipLibCheck": true,
+    "preserveConstEnums": true,
+    "rootDir": "./"
+  },
+  "exclude": ["node_modules"],
+  "include": ["src/**/*.ts"]
+}

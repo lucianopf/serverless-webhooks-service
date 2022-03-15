@@ -1,5 +1,5 @@
-const dynamoose = require('dynamoose')
-const cuid = require('cuid')
+import dynamoose from 'dynamoose'
+import cuid from 'cuid'
 
 const { Schema } = dynamoose
 
@@ -44,4 +44,4 @@ const modelOptions = {
 
 const Store = dynamoose.model(`${PROJECT_NAME}.${TABLE_NAME}`, storeSchema, modelOptions)
 
-module.exports = Store
+export default Store

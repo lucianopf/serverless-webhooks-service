@@ -1,4 +1,4 @@
-const { getHandlersDefinitions } = require('./src/handlers')
+import { getHandlersDefinitions } from './src/handlers'
 
 const PROJECT_NAME = 'serverless-webhooks-service'
 
@@ -36,6 +36,7 @@ module.exports = {
   functions: getHandlersDefinitions(),
   resources: {},
   plugins: [
-    'serverless-offline'
+    'serverless-plugin-typescript',
+    'serverless-offline',
   ],
 }

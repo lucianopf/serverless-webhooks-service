@@ -32,6 +32,6 @@ function mapHandlers (handler, prefix) {
     }, {})
 }
 
-module.exports = {
+export {
   mapHandlers,
 }

@@ -1,4 +1,4 @@
-const { mapHandlers } = require('../../../src/utils/handlers')
+import { mapHandlers } from '../../../src/utils/handlers'
 
 describe('Handlers util', () => {
   describe('mapHandlers', () => {

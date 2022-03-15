@@ -1,4 +1,4 @@
-const dynamoose = require('dynamoose')
+import dynamoose from 'dynamoose'
 
 const {
   NODE_ENV,
@@ -8,8 +8,8 @@ if (NODE_ENV === 'test' || NODE_ENV === 'development') {
   dynamoose.aws.ddb.local()
 }
 
-const Applications = require('./applications')
+import Applications from './applications'
 
-module.exports = {
+export {
   Applications,
 }

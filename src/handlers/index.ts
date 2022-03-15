@@ -1,4 +1,4 @@
-const { mapHandlers } = require('../utils/handlers')
+import { mapHandlers } from '../utils/handlers'
 
 const applications = require('./applications')
 
@@ -10,6 +10,6 @@ function getHandlersDefinitions () {
   }
 }
 
-module.exports = {
+export {
   getHandlersDefinitions,
 }
