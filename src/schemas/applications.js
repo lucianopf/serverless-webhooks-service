@@ -6,6 +6,11 @@ const createApplications = yup.object({
   secret: yup.string().nullable(),
 }).noUnknown()
 
+const showApplications = yup.object({
+  id: yup.string().defined().required(),
+}).noUnknown()
+
 module.exports = {
   createApplications,
+  showApplications,
 }

@@ -1,7 +1,7 @@
 const applicationHandler = require('../../../src/handlers/applications')
 const { Applications } = require('../../../src/database')
 
-const APP_ID = 'create_1'
+const APP_ID = 'create_handler_1'
 
 describe('Application handler', () => {
   beforeEach(() => {
@@ -113,7 +113,7 @@ describe('Application handler', () => {
 
       expect(statusCode).toBe(400)
       expect(response.code).toBe('bad_request')
-      expect(response.message).toBe('ConditionalCheckFailedException: The conditional request failed')
+      expect(response.message).toBe('Application already exists')
     })
 
     it('creating with invalid JSON', async () => {
@@ -129,6 +129,61 @@ describe('Application handler', () => {
       expect(statusCode).toBe(500)
       expect(response.code).toBe('internal_server_error')
       expect(response.message).toBe('Internal server error')
+    })
+  })
+
+  describe('show',() => {
+    beforeEach(async () => {
+      await applicationHandler.create({
+        body: `{"app_id": "${APP_ID}"}`,
+      })
+
+    })
+
+    it('show existing app_id', async () => {
+      const response = await applicationHandler.show({
+        pathParameters: {
+          id: APP_ID,
+        },
+      })
+
+      const body = JSON.parse(response.body)
+
+      expect(response.statusCode).toBe(200)
+      expect(body.code).toBe('sucess')
+      expect(body.data).toHaveProperty('app_id', APP_ID)
+      expect(body.data).toHaveProperty('created_at')
+      expect(body.data).toHaveProperty('updated_at')
+      expect(body.data).toHaveProperty('status', 'active')
+      expect(body.data).toHaveProperty('api_key')
+    })
+
+    it('show non existing app_id', async () => {
+      const response = await applicationHandler.show({
+        pathParameters: {
+          id: 'fake_non_existing_application',
+        },
+      })
+
+      const body = JSON.parse(response.body)
+
+      expect(response.statusCode).toBe(404)
+      expect(body.code).toBe('not_found')
+    })
+
+    it('show with invalid id', async () => {
+      const response = await applicationHandler.show({
+        pathParameters: {
+          id: null,
+        },
+      })
+
+      const body = JSON.parse(response.body)
+
+      expect(response.statusCode).toBe(400)
+      expect(body.code).toBe('bad_request')
+      expect(body).toHaveProperty('message')
+      
     })
   })
 })

@@ -1,7 +1,7 @@
 const applicationService = require('../../../src/services/applications')
 const { Applications } = require('../../../src/database')
 
-const APP_ID = 'create_1'
+const APP_ID = 'create_service_1'
 
 describe('Application service', () => {
   beforeEach(() => {
@@ -57,19 +57,62 @@ describe('Application service', () => {
           app_id: APP_ID,
         })
       } catch (error) {
-        expect(error).toHaveProperty('name', 'ConditionalCheckFailedException')
-        expect(error.message).toContain('The conditional request failed')
+        expect(error).toHaveProperty('name', 'ValidationError')
+        expect(error.errors).toContain('Application already exists')
       }
     })
 
     it('creating without app_id', async () => {
       try {
-        await applicationService.create()
+        await applicationService.create({})
       } catch (error) {
         expect(error).toHaveProperty('name', 'ValidationException')
         expect(error.message).toContain('One of the required keys was not given a value')
       }
     })
-    
+  })
+
+  describe('show',() => {
+    let application
+
+    beforeEach(async () => {
+      application = await applicationService.create({
+        app_id: APP_ID,
+      })
+    })
+
+    afterAll(() => {
+      return Applications.delete(APP_ID).catch()
+    })
+
+    it('show existing app_id', async () => {
+      const response = await applicationService.show(APP_ID)      
+
+      expect(response).toHaveProperty('app_id', APP_ID)
+      expect(response).toHaveProperty('created_at')
+      expect(response).toHaveProperty('updated_at')
+      expect(response).toHaveProperty('status', 'active')
+      expect(response).toHaveProperty('api_key', application.api_key)
+    })
+
+    it('show non existing app_id', async () => {
+      const response = await applicationService.show('invalid_random_id')
+     
+      expect(response).toBe(undefined)
+    })
+
+    it('show with invalid app_id', async () => {
+      let response = null
+
+      try {
+        response = await applicationService.show()
+      } catch (error) {
+        expect(error).toHaveProperty('name', 'ValidationError')
+        expect(error).toHaveProperty('type', 'ValidationError')
+        expect(error.errors).toContain('The number of conditions on the keys is invalid')
+      }
+
+      expect(response).toBe(null)
+    })
   })
 })
