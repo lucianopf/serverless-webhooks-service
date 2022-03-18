@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "NODE_ENV=test jest",
+    "test": "NODE_ENV=test jest --coverage",
     "test:watch": "NODE_ENV=test jest --watch",
     "dev": "NODE_ENV=development sls offline"
   },
