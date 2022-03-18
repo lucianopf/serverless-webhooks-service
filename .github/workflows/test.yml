@@ -1,0 +1,16 @@
+name: Tests CI
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test using Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - run: npm install
+      - run: docker run -d -p 8000:8000 amazon/dynamodb-local
+      - run: npm test
