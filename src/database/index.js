@@ -14,7 +14,9 @@ if (NODE_ENV === 'test' || NODE_ENV === 'development') {
 }
 
 const Applications = require('./applications')
+const Configs = require('./configs')
 
 module.exports = {
   Applications,
+  Configs,
 }

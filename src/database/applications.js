@@ -7,7 +7,7 @@ const { PROJECT_NAME } = process.env
 
 const TABLE_NAME = 'Applications'
 
-const storeSchema = new Schema(
+const schema = new Schema(
   {
     app_id: {
       type: String,
@@ -42,6 +42,6 @@ const modelOptions = {
   update: true,
 }
 
-const Store = dynamoose.model(`${PROJECT_NAME}.${TABLE_NAME}`, storeSchema, modelOptions)
+const Application = dynamoose.model(`${PROJECT_NAME}.${TABLE_NAME}`, schema, modelOptions)
 
-module.exports = Store
+module.exports = Application
