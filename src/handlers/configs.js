@@ -1,7 +1,7 @@
-const service = require('../services/applications')
-const schemas = require('../schemas/applications')
+const service = require('../services/configs')
+const schemas = require('../schemas/configs')
 const response = require('../utils/response')
-const logger = require('../utils/logger')('application_handler')
+const logger = require('../utils/logger')('config_handler')
 
 async function create (event) {
   try {
@@ -13,10 +13,10 @@ async function create (event) {
       { abortEarly: false }
     )
 
-    const application = await service.create(payload)
+    const config = await service.create(payload)
 
     return response.sucess({
-      body: application,
+      body: config,
       statusCode: 201,
     })
   } catch (error) {
@@ -30,6 +30,57 @@ async function create (event) {
     return response.error() 
   }
 
+}
+
+async function list (event) {
+  try {
+    const { queryStringParameters } = event
+
+    logger.info({
+      from: 'request',
+      operation: 'list',
+      queryStringParameters,
+    })
+
+    const payload = await schemas.list.validate(
+      queryStringParameters,
+      { abortEarly: false }
+    )
+    
+    const config = await service.list(payload.app_id)
+  
+    if (!config) {
+      return response.error({
+        statusCode: 404,
+      })
+    }
+
+    logger.info({
+      from: 'response',
+      queryStringParameters,
+      config,
+    })
+  
+    return response.sucess({
+      body: config,
+    })
+  } catch (error) {
+    logger.error({
+      from: 'response',
+      operation: 'list',
+      error,
+      queryStringParameters: event.queryStringParameters,
+    })
+
+    if (error.name === 'ValidationError') {
+      return response.error({
+        statusCode: 400,
+        message: error.errors.toString(),
+      })
+    }
+
+    return response.error() 
+  }
 }
 
 async function show (event) {
@@ -47,9 +98,9 @@ async function show (event) {
       { abortEarly: false }
     )
     
-    const application = await service.show(payload.id)
+    const config = await service.show(payload.id)
   
-    if (!application) {
+    if (!config) {
       return response.error({
         statusCode: 404,
       })
@@ -58,11 +109,11 @@ async function show (event) {
     logger.info({
       from: 'response',
       pathParameters,
-      application,
+      config,
     })
   
     return response.sucess({
-      body: application,
+      body: config,
     })
   } catch (error) {
     logger.error({
@@ -85,5 +136,6 @@ async function show (event) {
 
 module.exports = {
   create,
+  list,
   show,
 }
