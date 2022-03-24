@@ -15,8 +15,10 @@ if (NODE_ENV === 'test' || NODE_ENV === 'development') {
 
 const Applications = require('./applications')
 const Configs = require('./configs')
+const Webhooks = require('./webhooks')
 
 module.exports = {
   Applications,
   Configs,
+  Webhooks,
 }
