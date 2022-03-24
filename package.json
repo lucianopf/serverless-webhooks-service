@@ -22,6 +22,9 @@
     "url": "https://github.com/lucianopf/serverless-webhooks-service/issues"
   },
   "homepage": "https://github.com/lucianopf/serverless-webhooks-service#readme",
+  "jest": {
+    "testMatch": [ "**/tests/**/*.js"]
+  },
   "devDependencies": {
     "jest": "^27.5.1",
     "serverless": "^3.7.2",
